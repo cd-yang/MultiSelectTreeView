@@ -1,0 +1,39 @@
+﻿<Window x:Class="MultiSelectTreeView.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MultiSelectTreeView"
+        mc:Ignorable="d"
+        Title="Multi Select TreeView" Height="450" Width="500">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TreeView Grid.Column="0" ItemsSource="{Binding TreeData}">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type local:TreeItem}"
+                                          ItemsSource="{Binding Children}">
+                    <TextBlock Text="{Binding Data.Label}"/>
+                </HierarchicalDataTemplate>
+
+                <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource {x:Type TreeViewItem}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                            <Setter Property="Background" Value="LightYellow"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TreeView.Resources>
+        </TreeView>
+
+        <StackPanel Grid.Column="1">
+            <!--<Button Content="Select all" Command="{Binding SelectAllCommand}"/>
+            <Button Content="Clear selection" Command="{Binding ClearSelectionCommand}"/>
+            <Button Content="Random select" Command="{Binding RandomSelectCommand}"/>-->
+        </StackPanel>
+
+    </Grid>
+</Window>
